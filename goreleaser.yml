@@ -27,6 +27,18 @@ builds:
       - CXX=o64-clang++
     ldflags:
       - -s -w -X main.version={{.Version}}
+  - id: darwin-arm64
+    main: ./cmd/enpasscli/main.go
+    binary: enpasscli
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    env:
+      - CC=oa64-clang
+      - CXX=oa64-clang++
+    ldflags:
+      - -s -w -X main.version={{.Version}}
   - id: linux-armhf
     main: ./cmd/enpasscli/main.go
     binary: enpasscli
@@ -45,6 +57,7 @@ archives:
   - id: enpass-cli
     builds:
       - darwin64
+      - darwin-arm64
       - linux64
       - linux-armhf
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
